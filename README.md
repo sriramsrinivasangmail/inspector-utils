@@ -78,7 +78,6 @@ Events:            <none>
 ### Deploy inspector-utils 
 
 ```
-
     kubectl apply -f ./inspector-utils.sh
 ```
 
@@ -128,26 +127,40 @@ command terminated with exit code 1
 
 1). Check if the headless service resolves fine
 
-```kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-svc 33001```
+```
+    kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-svc 33001
+```
 
 
 2). Check if you can reach each member directly from the inspector pod
 
 **Note** - each individual statefulset member is indentified by `<statefulset-name>-<ordinal>.<headless-svc-name>`
 
-```kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-0.sts-svc 33001```
+```
+    kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-0.sts-svc 33001
+```
 
-```kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-1.sts-svc 33001```
+```
+    kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-1.sts-svc 33001
+```
 
-```kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-2.sts-svc 33001```
+```
+    kubectl exec -it $(oc get pods -l app=inspector-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-2.sts-svc 33001
+```
 
 
 3). Test if one member can reach another
 
 In the examples below, we exec into the first member (the pod should be `sts-tester-tcp-0`) and use nc to reach itself and others.
 
-```kubectl exec -it $(oc get pods -l app=sts-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-0.sts-svc 33001```
+```
+    kubectl exec -it $(oc get pods -l app=sts-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-0.sts-svc 33001
+```
 
-```kubectl exec -it $(oc get pods -l app=sts-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-1.sts-svc 33001```
+```
+    kubectl exec -it $(oc get pods -l app=sts-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-1.sts-svc 33001
+```
 
-```kubectl exec -it $(oc get pods -l app=sts-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-2.sts-svc 33001```
+```
+    kubectl exec -it $(oc get pods -l app=sts-app -o jsonpath='{.items[0].metadata.name}') -- nc -vz sts-tester-tcp-2.sts-svc 33001
+ ```
