@@ -1,3 +1,10 @@
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
+
 # inspector-utils
 
 Helper image to test out network connectivity in Kubernetes - with nc
