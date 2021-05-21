@@ -22,11 +22,13 @@ Login to your Kube and pick a namespace.
 
 ### Deploy the Statefulset
 
-`kubectl apply -f ./sts-tester-no-vol.yaml`
+```
+   kubectl apply -f ./sts-tester-no-vol.yaml
+```
 
 - ensure all members are up and  have IPs assigned
 
-` kubectl get pods -l app=sts-app -o wide`
+`   kubectl get pods -l app=sts-app -o wide`
 
 ```
 NAME               READY   STATUS    RESTARTS   AGE   IP              NODE                                NOMINATED NODE   READINESS GATES
