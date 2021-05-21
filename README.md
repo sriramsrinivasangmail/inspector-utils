@@ -28,7 +28,7 @@ Login to your Kube and pick a namespace.
 
 - ensure all members are up and  have IPs assigned
 
-`   kubectl get pods -l app=sts-app -o wide`
+```   kubectl get pods -l app=sts-app -o wide```
 
 ```
 NAME               READY   STATUS    RESTARTS   AGE   IP              NODE                                NOMINATED NODE   READINESS GATES
@@ -39,7 +39,9 @@ sts-tester-tcp-2   1/1     Running   0          82m   10.254.18.212   worker0.ze
 
 - confirm that the headless svc is created
 
-`kubectl get svc sts-svc`
+`
+   kubectl get svc sts-svc
+`
 
 ```
 NAME      TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)     AGE
