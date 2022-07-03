@@ -1,0 +1,56 @@
+### example of running a job with RBAC equivalent to Operator lifecycle manager
+### to work with OLM resources across namespaces
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: testjob-sa
+  namespace: default
+  labels:
+    sample: testjob
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: testjob-sa-rb
+  labels:
+    sample: testjob
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:controller:operator-lifecycle-manager
+subjects:
+- kind: ServiceAccount
+  name: testjob-sa
+  namespace: default
+
+---
+
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: test-job
+  namespace: default
+labels:
+  sample: testjob
+spec:
+  template:
+    metadata:
+      labels:
+        sample: testjob
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+      serviceAccountName: testjob-sa
+      containers:
+      - name: whatcanido
+        image: "icr.io/cpopen/cpd/olm-utils:latest" 
+        command: ["oc",  "get", "sub,csv,catsrc", "-A" ]
+      restartPolicy: Never
+  backoffLimit: 2
+
