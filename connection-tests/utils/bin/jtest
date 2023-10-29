@@ -1,0 +1,9 @@
+#!/bin/bash
+
+jdir=`dirname $0`
+export CLASSPATH=$jdir; 
+
+
+set -x
+java SSLCertTest "$@"
+
