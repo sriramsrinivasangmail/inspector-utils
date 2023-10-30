@@ -1,0 +1,6 @@
+#!/bin/bash
+
+gdir=`dirname $0`
+set -x
+$gdir/sslcerttest "$@"
+
