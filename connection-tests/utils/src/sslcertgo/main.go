@@ -1,7 +1,7 @@
 package main
 
 import (
-	"crypto/tls"
+//	"crypto/tls"
 	"fmt"
 	"net/http"
 	"io/ioutil"
@@ -21,7 +21,7 @@ func main() {
 
 	// Custom Transport to handle insecure SSL certificates (for demo purposes)
 	tr := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		//TLSClientConfig: &tls.Config{InsecureSkipVerify: false},
 	}
 
 	// Make the GET request with the custom Transport

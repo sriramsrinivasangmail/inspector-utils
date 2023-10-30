@@ -19,4 +19,6 @@ brings up just a container with bash as the entrypoint
 
 for example:
 
-`./test-run.sh /utils/bin/jtest www.bbc.co.uk 443`
+`./test-java.sh www.bbc.co.uk 443`
+
+`./test-go https://google.com`
